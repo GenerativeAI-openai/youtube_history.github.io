@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>유튜브의 역사</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background: #f0f0f0;
+        }
+        .container {
+            position: relative;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 15px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+            padding: 20px;
+            max-width: 800px;
+            margin: 50px auto;
+            opacity: 1;
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+        .hidden {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        .card {
+            margin: 15px 0;
+            padding: 10px;
+            background: #f9f9f9;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+        }
+        .card:hover {
+            background: #e3f2fd;
+        }
+        .back-arrow {
+            font-size: 20px;
+            color: #007bff;
+            cursor: pointer;
+            margin-bottom: 20px;
+        }
+        .back-arrow:hover {
+            text-decoration: underline;
+        }
+        footer {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 14px;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <div id="main" class="container">
+        <h1>유튜브의 역사</h1>
+        <div class="card" onclick="showDetails(0)">
+            <strong>2005/02/14</strong> - 유튜브 설립
+        </div>
+        <div class="card" onclick="showDetails(1)">
+            <strong>2006/11/13</strong> - 구글의 유튜브 인수
+        </div>
+        <div class="card" onclick="showDetails(2)">
+            <strong>2007/06/19</strong> - 유튜브 파트너 프로그램 출시
+        </div>
+        <div class="card" onclick="showDetails(3)">
+            <strong>2010/03/31</strong> - HTML5 플레이어 도입
+        </div>
+        <div class="card" onclick="showDetails(4)">
+            <strong>2012/06/01</strong> - 매월 10억 명의 사용자 달성
+        </div>
+        <div class="card" onclick="showDetails(5)">
+            <strong>2015/10/28</strong> - 유튜브 레드 출시
+        </div>
+        <div class="card" onclick="showDetails(6)">
+            <strong>2018/05/22</strong> - 유튜브 프리미엄 및 뮤직 출시
+        </div>
+        <div class="card" onclick="showDetails(7)">
+            <strong>2021/11/01</strong> - 유튜브 쇼츠 전 세계 출시
+        </div>
+        <footer>© 2025 유튜브 히스토리</footer>
+    </div>
+
+    <div id="details" class="container hidden">
+        <span class="back-arrow" onclick="goBack()">← 뒤로가기</span>
+        <h1 id="details-title"></h1>
+        <p id="details-content"></p>
+    </div>
+
+    <script>
+        const historyData = [
+            {
+                title: "2005/02/14 - 유튜브 설립",
+                content: "2005년 2월 14일, 스티브 첸, 채드 헐리, 자웨드 카림에 의해 유튜브가 설립되었습니다."
+            },
+            {
+                title: "2006/11/13 - 구글의 유튜브 인수",
+                content: "2006년 11월 13일, 구글은 유튜브를 약 16억 5천만 달러에 인수하며 큰 변화를 가져왔습니다."
+            },
+            {
+                title: "2007/06/19 - 유튜브 파트너 프로그램 출시",
+                content: "2007년 6월 19일, 유튜브는 파트너 프로그램을 도입하여 크리에이터들이 수익을 창출할 수 있도록 했습니다."
+            },
+            {
+                title: "2010/03/31 - HTML5 플레이어 도입",
+                content: "2010년 3월 31일, 유튜브는 HTML5 기반의 동영상 플레이어를 도입하며 기술적인 전환점을 맞이했습니다."
+            },
+            {
+                title: "2012/06/01 - 매월 10억 명의 사용자 달성",
+                content: "2012년 6월, 유튜브는 매월 10억 명의 사용자라는 기념비적인 수치를 달성했습니다."
+            },
+            {
+                title: "2015/10/28 - 유튜브 레드 출시",
+                content: "2015년 10월 28일, 유튜브는 광고 없는 서비스를 제공하는 유튜브 레드를 출시했습니다."
+            },
+            {
+                title: "2018/05/22 - 유튜브 프리미엄 및 뮤직 출시",
+                content: "2018년 5월 22일, 유튜브는 유튜브 프리미엄과 유튜브 뮤직 서비스를 정식 출시했습니다."
+            },
+            {
+                title: "2021/11/01 - 유튜브 쇼츠 전 세계 출시",
+                content: "2021년 11월 1일, 짧은 동영상 포맷인 유튜브 쇼츠가 전 세계적으로 출시되었습니다."
+            }
+        ];
+
+        const mainContainer = document.getElementById('main');
+        const detailsContainer = document.getElementById('details');
+        const detailsTitle = document.getElementById('details-title');
+        const detailsContent = document.getElementById('details-content');
+
+        function showDetails(index) {
+            const data = historyData[index];
+            detailsTitle.textContent = data.title;
+            detailsContent.textContent = data.content;
+
+            mainContainer.classList.add('hidden');
+            setTimeout(() => {
+                mainContainer.style.display = 'none';
+                detailsContainer.style.display = 'block';
+                setTimeout(() => {
+                    detailsContainer.classList.remove('hidden');
+                }, 50);
+            }, 500);
+        }
+
+        function goBack() {
+            detailsContainer.classList.add('hidden');
+            setTimeout(() => {
+                detailsContainer.style.display = 'none';
+                mainContainer.style.display = 'block';
+                setTimeout(() => {
+                    mainContainer.classList.remove('hidden');
+                }, 50);
+            }, 500);
+        }
+    </script>
+</body>
+</html>
